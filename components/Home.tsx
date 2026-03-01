@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import MapView from "@/components/map/MapView";
 
@@ -212,13 +213,17 @@ function SideMenu({
   darkMode,
   onContactUs,
   onAccountAction,
+  user,
 }: {
+  
   open: boolean;
   onClose: () => void;
   darkMode: boolean;
   onContactUs: () => void;
   onAccountAction: (action: "login" | "signup" | "guest") => void;
+  user?: string | null;
 }) {
+  const router = useRouter();
   const [accountOpen, setAccountOpen] = useState(false);
   const [a11yOpen, setA11yOpen] = useState(false);
   const [fontSize, setFontSize] = useState(false);
@@ -321,6 +326,18 @@ function SideMenu({
           </div>
         </div>
 
+        {user && (
+          <button
+            onClick={() => {
+              router.push("/dashboard");
+              onClose();
+            }}
+            className="w-full text-left px-4 py-3 rounded-xl text-foreground font-medium transition-colors hover:bg-muted/60"
+          >
+            Dashboard
+          </button>
+        )}
+
         <button
           onClick={() => {
             onContactUs();
@@ -421,7 +438,7 @@ function ThemeToggle({ darkMode, onToggle }: { darkMode: boolean; onToggle: () =
     </button>
   );
 }
-
+ 
 /* ── Main Home Component ── */
 export default function Home({
   darkMode,
@@ -460,13 +477,15 @@ export default function Home({
 
       <header className="relative z-30 flex items-center justify-between px-5 py-4 md:px-8">
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="p-1 rounded-lg transition-colors hover:bg-muted/30"
-            aria-label="Open menu"
-          >
-            <CrowIcon className="w-9 h-9 text-foreground" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="p-1 rounded-lg transition-colors hover:bg-muted/30"
+              aria-label="Open menu"
+            >
+              <CrowIcon className="w-9 h-9 text-foreground" />
+            </button>
+          </div>
           <h1 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
             BinBuddy
           </h1>
@@ -480,6 +499,7 @@ export default function Home({
         darkMode={darkMode}
         onContactUs={onContactUs}
         onAccountAction={onAccountAction}
+        user={user}
       />
 
       <section className="relative z-10 text-center px-5 pt-2 pb-6">

@@ -1,5 +1,7 @@
 "use client";
 
+import binsData from "@/data/bins.json";
+
 import React, { useEffect, useMemo, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -78,88 +80,10 @@ export default function MapClient({ darkMode }: { darkMode: boolean }) {
   const center = userPos ?? defaultCenter;
 
   // 🔥 9 bins (5 real + 4 dummy)
-  useEffect(() => {
-    const mockBins: Bin[] = [
-      // REAL BINS
-      {
-        _id: "bin11",
-        type: "general",
-        postcode: "BN2",
-        location: { lat: 50.865280, lng: -0.086300 },
-        capacityPct: 42,
-        photo: "/bin11.jpg",
-      },
-      {
-        _id: "bin22",
-        type: "recycling",
-        postcode: "BN2",
-        location: { lat: 50.865363, lng: -0.085586 },
-        capacityPct: 65,
-        photo: "/bin22.jpg",
-      },
-      {
-        _id: "bin33",
-        type: "general",
-        postcode: "BN2",
-        location: { lat: 50.865126, lng: -0.084569 },
-        capacityPct: 20,
-        photo: "/bin33.jpg",
-      },
-      {
-        _id: "bin44",
-        type: "recycling",
-        postcode: "BN2",
-        location: { lat: 50.864949, lng: -0.084793 },
-        capacityPct: 75,
-        photo: "/bin44.jpg",
-      },
-      {
-        _id: "bin55",
-        type: "general",
-        postcode: "BN2",
-        location: { lat: 50.864899, lng: -0.085291 },
-        capacityPct: 90,
-        photo: "/bin55.jpg",
-      },
-
-      // DUMMY BINS
-      {
-        _id: "bin66",
-        type: "general",
-        postcode: "BN1",
-        location: { lat: 50.8229, lng: -0.1373 },
-        capacityPct: 35,
-        photo: "/bin66.png",
-      },
-      {
-        _id: "bin77",
-        type: "recycling",
-        postcode: "BN1",
-        location: { lat: 50.8236, lng: -0.1358 },
-        capacityPct: 72,
-        photo: "/bin77.png",
-      },
-      {
-        _id: "bin88",
-        type: "general",
-        postcode: "BN1",
-        location: { lat: 50.8218, lng: -0.1390 },
-        capacityPct: 18,
-        photo: "/bin88.png",
-      },
-      {
-        _id: "bin99",
-        type: "recycling",
-        postcode: "BN1",
-        location: { lat: 50.8209, lng: -0.1362 },
-        capacityPct: 60,
-        photo: "/bin99.png",
-      },
-    ];
-
-    setBins(mockBins);
-    setLoading(false);
-  }, []);
+ useEffect(() => {
+  setBins(binsData as Bin[]);
+  setLoading(false);
+}, []);
 
   useEffect(() => {
     if (!navigator.geolocation) return;
