@@ -1,6 +1,6 @@
 # Overview
 
-BinFinder is a mobile-first web application that helps people find nearby bins, understand what type of waste each bin accepts, and contribute to cleaner, more sustainable communities through community reporting and AI-assisted validation.
+Binbuddy is a mobile-first web application that helps people find nearby bins, understand what type of waste each bin accepts, and contribute to cleaner, more sustainable communities through community reporting and AI-assisted validation.
 The platform combines live map-based discovery, user-submitted bin reports, image-based verification, and gamified participation to make waste disposal easier for the public while also generating higher-quality data that could support local authorities and other stakeholders involved in waste management.
 Our goal is not only to help users locate bins more easily, but also to improve the quality, accuracy, and usefulness of public waste infrastructure data in a way that is practical within a hackathon prototype.
 ________________________________________
@@ -13,7 +13,7 @@ A common issue in many towns and cities is that people often do not know:
 •	whether there are nearby recycling or specialist disposal points
 •	whether waste infrastructure data is accurate, complete, or up to date
 This creates friction for everyday recycling and waste disposal. It also limits the ability of communities and authorities to identify infrastructure gaps, improve public cleanliness, and respond to changing needs.
-BinFinder addresses this by creating a simple system where users can:
+BinBuddy addresses this by creating a simple system where users can:
 •	discover bins on a map
 •	view useful information about each bin
 •	submit photo-backed reports
@@ -99,7 +99,7 @@ ________________________________________
 
 We used Gemini because the project depends on understanding submitted images, not just storing them.
 Google’s Gemini API is designed for multimodal input, including image understanding, and supports tasks such as image classification and visual reasoning without necessarily requiring a separate specialised computer vision pipeline. That makes it a strong fit for a hackathon prototype where we needed an AI layer that could quickly support practical validation tasks.
-For BinFinder, Gemini is especially useful because it helps us answer questions such as:
+For BinBuddy, Gemini is especially useful because it helps us answer questions such as:
 •	Does this image actually contain a bin?
 •	Does the image look relevant to the submitted report?
 •	Can we estimate an approximate fill level from what is visible?
@@ -113,7 +113,7 @@ ________________________________________
 
 # Why We Used Auth0
 
-We used Auth0 because BinFinder needs a secure and scalable way to separate casual browsing from trusted contribution.
+We used Auth0 because BinBuddy needs a secure and scalable way to separate casual browsing from trusted contribution.
 Auth0 supports authentication and authorisation using OpenID Connect (OIDC) and OAuth 2.0, and it issues tokens such as JWTs that can be used to protect backend routes and APIs. This is useful for a platform like ours, where users may be allowed to browse publicly but must be authenticated before submitting reports, earning XP, or accessing account-linked features.
 Auth0 is a strong fit for this project because it helps us:
 •	verify user identity securely
@@ -121,12 +121,12 @@ Auth0 is a strong fit for this project because it helps us:
 •	prevent anonymous abuse of contribution features
 •	protect reward and gamification systems from manipulation
 •	secure protected backend actions and moderation flows
-In other words, Auth0 is not only there for login. It supports the trust model of the platform. Since BinFinder relies on user-generated environmental data, secure identity and protected API access are important to keeping the system reliable.
+In other words, Auth0 is not only there for login. It supports the trust model of the platform. Since BinBuddy relies on user-generated environmental data, secure identity and protected API access are important to keeping the system reliable.
 ________________________________________
 
 # Why It Fits the CXI+AI Track
 
-BinFinder aligns well with the CXI+AI / design-to-delivery accelerator idea because the project combines user experience, AI decision support, and clear delivery of outcomes.
+BinBuddy aligns well with the CXI+AI / design-to-delivery accelerator idea because the project combines user experience, AI decision support, and clear delivery of outcomes.
 From the user side, the experience is simple:
 •	open the app
 •	find a nearby bin
@@ -137,17 +137,17 @@ From the system side, the project turns that interaction into a more complete de
 •	validate it with AI
 •	improve trust in the submission
 •	surface information that could support operational follow-up
-That means BinFinder is more than a bin-discovery interface. It is an AI-enhanced service flow that translates public interaction into more useful, more actionable environmental data.
+That means BinBuddy is more than a bin-discovery interface. It is an AI-enhanced service flow that translates public interaction into more useful, more actionable environmental data.
 ________________________________________
 
 # Local Authority and Public Value
 
-A key part of BinFinder is that it is useful not only for individuals, but also for local authorities and councils.
+A key part of BinBuddy is that it is useful not only for individuals, but also for local authorities and councils.
 Local authorities are responsible for many public waste-management decisions, but they often face challenges around:
 •	incomplete on-the-ground data
 •	inconsistent public reporting
 •	difficulty spotting infrastructure gaps
-•	limited insight into how bins are being used. BinFinder can help by creating a more structured reporting stream. Over time, a platform like this could support authorities by:
+•	limited insight into how bins are being used. BinBuddy can help by creating a more structured reporting stream. Over time, a platform like this could support authorities by:
 •	identifying areas with poor bin coverage
 •	highlighting demand for recycling points
 •	spotting recurring reports about full or poorly located bins
@@ -160,14 +160,14 @@ ________________________________________
 
 # Environmental Impact
 
-BinFinder supports better environmental behaviour by reducing friction around proper waste disposal.
-If people can quickly find an appropriate bin, understand bin types, and locate related waste points, they are more likely to dispose of waste correctly rather than delay disposal, contaminate recycling, or litter. In that sense, BinFinder supports both behaviour change and better infrastructure visibility.
+BinBuddy supports better environmental behaviour by reducing friction around proper waste disposal.
+If people can quickly find an appropriate bin, understand bin types, and locate related waste points, they are more likely to dispose of waste correctly rather than delay disposal, contaminate recycling, or litter. In that sense, BinBuddy supports both behaviour change and better infrastructure visibility.
 The app also encourages communities to contribute useful environmental information rather than relying only on static or incomplete datasets. This makes the platform not just informative, but participatory.
 ________________________________________
 
 # Connection to the UN Sustainable Development Goals
 
-BinFinder is strongly connected to several UN Sustainable Development Goals because it helps improve how people interact with waste infrastructure in everyday life. By making bins and recycling points easier to find and understand, the project supports more sustainable urban living and encourages cleaner, more efficient use of public spaces. It also helps promote more responsible consumption and disposal habits by making waste sorting and recycling infrastructure more accessible to the public. In addition, better waste disposal and improved reporting of waste infrastructure can help reduce littering, pollution, and environmental degradation in local areas, which gives the project a broader environmental value. A lighter connection can also be made to climate action, since better waste systems and more sustainable urban behaviour contribute to overall environmental resilience, although the strongest and most direct links are with sustainable cities, responsible consumption, and life on land.
+BinBuddy is strongly connected to several UN Sustainable Development Goals because it helps improve how people interact with waste infrastructure in everyday life. By making bins and recycling points easier to find and understand, the project supports more sustainable urban living and encourages cleaner, more efficient use of public spaces. It also helps promote more responsible consumption and disposal habits by making waste sorting and recycling infrastructure more accessible to the public. In addition, better waste disposal and improved reporting of waste infrastructure can help reduce littering, pollution, and environmental degradation in local areas, which gives the project a broader environmental value. A lighter connection can also be made to climate action, since better waste systems and more sustainable urban behaviour contribute to overall environmental resilience, although the strongest and most direct links are with sustainable cities, responsible consumption, and life on land.
 
 ________________________________________
 
@@ -193,14 +193,14 @@ Our prototype design includes several integrity checks:
 •	validate that uploaded images appear relevant
 •	require admin approval before higher-value rewards
 •	keep browsing open while protecting contribution routes
-This makes BinFinder more than a simple crowdsource form. It becomes a more trustworthy contribution system.
+This makes BinBuddy more than a simple crowdsource form. It becomes a more trustworthy contribution system.
 
 ________________________________________
 
 # Gamification Strategy
 
 One of our design goals was to encourage repeated, high-quality engagement.
-To do this, BinFinder introduces a lightweight gamification model:
+To do this, BinBuddy introduces a lightweight gamification model:
 •	users earn XP when valid reports are accepted
 •	users move through bronze, silver, and gold leagues
 •	higher trust and contribution levels can unlock conceptual rewards
@@ -210,7 +210,7 @@ ________________________________________
 
 # Challenges
 
-Some of the main challenges in building BinFinder were:
+Some of the main challenges in building BinBuddy were:
 •	designing something realistic within a 24-hour hackathon
 •	balancing AI ambition with a deliverable prototype
 •	preventing fake or duplicate submissions
@@ -221,7 +221,7 @@ ________________________________________
 
 # What We’re Proud Of
 
-We are especially proud that BinFinder combines:
+We are especially proud that BinBuddy combines:
 •	public usefulness
 •	AI-assisted validation
 •	secure contribution flows
@@ -232,7 +232,7 @@ ________________________________________
 
 # Future Improvements
 
-With more time, BinFinder could be extended with:
+With more time, BinBuddy could be extended with:
 •	real-time reporting dashboards for councils
 •	stronger moderation tools
 •	route planning to the nearest suitable bin
@@ -245,7 +245,7 @@ ________________________________________
 
 # Hackathon Track Fit Summary
 
-BinFinder is especially relevant for the following tracks:
+BinBuddy is especially relevant for the following tracks:
 •	Best Use of Gemini API – because Gemini powers the project’s core image-validation and reasoning layer rather than being added only for presentation
 •	Best Use of Auth0 – because secure identity, protected API access, and trusted user-linked reporting are central to the product’s contribution model
 •	CXI+AI / Design to Delivery Accelerator – because the project combines thoughtful user experience with AI-assisted processing and a clear path from user action to delivered operational value
