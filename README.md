@@ -19,6 +19,7 @@ BinFinder addresses this by creating a simple system where users can:
 •	help improve public data quality through AI-supported validation
 ________________________________________
 Our Solution
+
 BinFinder provides a map-based interface where users can explore nearby bins and related waste points. Each mapped bin can include:
 •	postcode
 •	coordinates
@@ -34,11 +35,13 @@ The platform also supports additional map layers and related waste-management po
 Users can report new bins or submit information updates. To improve integrity and reduce spam or misleading submissions, reports go through an AI-assisted validation flow before being treated as trusted contributions.
 ________________________________________
 Why We Built It
+
 We wanted to build something that solves a real-world environmental problem in a way that is both practical and scalable.
 Rather than treating waste disposal as only a logistics issue, we approached it as a data, accessibility, and participation problem. If people can easily find the right bin, understand where waste should go, and contribute to keeping information up to date, cities become easier to keep clean and communities become more engaged in sustainable behaviour.
 At the same time, a platform like this can help move waste reporting from fragmented and informal public feedback into a more structured, visual, and actionable stream of information that could be useful for local councils and other local authorities.
 ________________________________________
 Key Features
+
 1. Interactive map of nearby bins
 Users can view nearby bins on a live, mobile-friendly map. This makes the experience quick, intuitive, and suitable for on-the-go use.
 2. Detailed bin information
@@ -53,7 +56,9 @@ Clicking a bin reveals useful information such as:
 When submitting a report, users must take a real-time photo through the app instead of uploading an existing image from their gallery.
 This is designed to improve trust in submissions and reduce the likelihood of false, outdated, or misleading uploads.
 4. Gemini AI validation
+
 Gemini is used to analyse submitted images and determine whether:
+
 •	the image contains a real bin
 •	the image is relevant to the report
 •	the submission appears fake, misleading, or AI-generated
@@ -61,7 +66,9 @@ A report is only treated as valid if it passes the required validation checks.
 5. Estimated fill-level analysis
 The system uses AI reasoning to estimate how full a bin appears to be based on the submitted image.
 6. Gamification
+
 To encourage participation, users can earn:
+
 •	XP points
 •	bronze, silver, and gold leagues
 •	conceptual rewards such as vouchers or tickets
@@ -74,7 +81,9 @@ To reduce misuse, the platform can include:
 8. Guest and authenticated flows
 Some parts of the platform remain open for browsing, while reporting and progression features are reserved for authenticated users.
 ________________________________________
+
 How It Works
+
 The intended user flow is:
 1.	A user opens the app on their phone.
 2.	They allow location access.
@@ -86,7 +95,9 @@ The intended user flow is:
 8.	Valid reports can then contribute to platform data quality and reward progression.
 This creates a loop where the public both uses and improves the system.
 ________________________________________
+
 Why We Used Gemini
+
 We used Gemini because the project depends on understanding submitted images, not just storing them.
 Google’s Gemini API is designed for multimodal input, including image understanding, and supports tasks such as image classification and visual reasoning without necessarily requiring a separate specialised computer vision pipeline. That makes it a strong fit for a hackathon prototype where we needed an AI layer that could quickly support practical validation tasks.
 For BinFinder, Gemini is especially useful because it helps us answer questions such as:
@@ -100,7 +111,9 @@ Gemini is therefore part of the core product logic rather than a cosmetic add-on
 •	supporting moderation
 •	turning raw photo uploads into more meaningful environmental information
 ________________________________________
+
 Why We Used Auth0
+
 We used Auth0 because BinFinder needs a secure and scalable way to separate casual browsing from trusted contribution.
 Auth0 supports authentication and authorisation using OpenID Connect (OIDC) and OAuth 2.0, and it issues tokens such as JWTs that can be used to protect backend routes and APIs. This is useful for a platform like ours, where users may be allowed to browse publicly but must be authenticated before submitting reports, earning XP, or accessing account-linked features.
 Auth0 is a strong fit for this project because it helps us:
@@ -111,7 +124,9 @@ Auth0 is a strong fit for this project because it helps us:
 •	secure protected backend actions and moderation flows
 In other words, Auth0 is not only there for login. It supports the trust model of the platform. Since BinFinder relies on user-generated environmental data, secure identity and protected API access are important to keeping the system reliable.
 ________________________________________
+
 Why It Fits the CXI+AI Track
+
 BinFinder aligns well with the CXI+AI / design-to-delivery accelerator idea because the project combines user experience, AI decision support, and clear delivery of outcomes.
 From the user side, the experience is simple:
 •	open the app
@@ -125,7 +140,9 @@ From the system side, the project turns that interaction into a more complete de
 •	surface information that could support operational follow-up
 That means BinFinder is more than a bin-discovery interface. It is an AI-enhanced service flow that translates public interaction into more useful, more actionable environmental data.
 ________________________________________
+
 Local Authority and Public Value
+
 A key part of BinFinder is that it is useful not only for individuals, but also for local authorities and councils.
 Local authorities are responsible for many public waste-management decisions, but they often face challenges around:
 •	incomplete on-the-ground data
@@ -142,14 +159,22 @@ This means the project serves two audiences at once:
 •	the public, who need an easier way to find and use bins
 •	local authorities, who benefit from better waste infrastructure insight
 ________________________________________
+
 Environmental Impact
+
 BinFinder supports better environmental behaviour by reducing friction around proper waste disposal.
 If people can quickly find an appropriate bin, understand bin types, and locate related waste points, they are more likely to dispose of waste correctly rather than delay disposal, contaminate recycling, or litter. In that sense, BinFinder supports both behaviour change and better infrastructure visibility.
 The app also encourages communities to contribute useful environmental information rather than relying only on static or incomplete datasets. This makes the platform not just informative, but participatory.
 ________________________________________
+
 Connection to the UN Sustainable Development Goals
-BinFinder is strongly connected to several UN Sustainable Development Goals because it helps improve how people interact with waste infrastructure in everyday life. By making bins and recycling points easier to find and understand, the project supports more sustainable urban living and encourages cleaner, more efficient use of public spaces. It also helps promote more responsible consumption and disposal habits by making waste sorting and recycling infrastructure more accessible to the public. In addition, better waste disposal and improved reporting of waste infrastructure can help reduce littering, pollution, and environmental degradation in local areas, which gives the project a broader environmental value. A lighter connection can also be made to climate action, since better waste systems and more sustainable urban behaviour contribute to overall environmental resilience, although the strongest and most direct links are with sustainable cities, responsible consumption, and life on land.________________________________________
+
+BinFinder is strongly connected to several UN Sustainable Development Goals because it helps improve how people interact with waste infrastructure in everyday life. By making bins and recycling points easier to find and understand, the project supports more sustainable urban living and encourages cleaner, more efficient use of public spaces. It also helps promote more responsible consumption and disposal habits by making waste sorting and recycling infrastructure more accessible to the public. In addition, better waste disposal and improved reporting of waste infrastructure can help reduce littering, pollution, and environmental degradation in local areas, which gives the project a broader environmental value. A lighter connection can also be made to climate action, since better waste systems and more sustainable urban behaviour contribute to overall environmental resilience, although the strongest and most direct links are with sustainable cities, responsible consumption, and life on land.
+
+________________________________________
+
 Tech Stack
+
 •	Frontend: React that uses Typescript
 •	Map: Leaflet or Mapbox
 •	Authentication: Auth0
@@ -158,8 +183,11 @@ Tech Stack
 •	AI Validation: Gemini API
 •	Hosting: DigitalOcean
 •	Data Source for Prototype: Demo/mock data and JSON-based bin data
+
 ________________________________________
+
 Data and Validation Logic
+
 Because the platform includes community submissions, data quality is extremely important.
 Our prototype design includes several integrity checks:
 •	prevent duplicate reports from the same user for the same bin
@@ -168,16 +196,22 @@ Our prototype design includes several integrity checks:
 •	require admin approval before higher-value rewards
 •	keep browsing open while protecting contribution routes
 This makes BinFinder more than a simple crowdsource form. It becomes a more trustworthy contribution system.
+
 ________________________________________
+
 Gamification Strategy
+
 One of our design goals was to encourage repeated, high-quality engagement.
 To do this, BinFinder introduces a lightweight gamification model:
 •	users earn XP when valid reports are accepted
 •	users move through bronze, silver, and gold leagues
 •	higher trust and contribution levels can unlock conceptual rewards
 This approach helps turn sustainability participation into something more engaging while still keeping validation and moderation in place to discourage abuse.
+
 ________________________________________
+
 Challenges
+
 Some of the main challenges in building BinFinder were:
 •	designing something realistic within a 24-hour hackathon
 •	balancing AI ambition with a deliverable prototype
@@ -186,7 +220,9 @@ Some of the main challenges in building BinFinder were:
 •	combining map UX, AI validation, backend logic, and gamification into one coherent system
 These challenges shaped our design decisions and pushed us to prioritise features that were both meaningful and feasible.
 ________________________________________
+
 What We’re Proud Of
+
 We are especially proud that BinFinder combines:
 •	public usefulness
 •	AI-assisted validation
@@ -195,7 +231,9 @@ We are especially proud that BinFinder combines:
 •	potential relevance to local authorities
 Within a hackathon timeframe, we focused on building an idea that is both technically interesting and socially useful.
 ________________________________________
+
 Future Improvements
+
 With more time, BinFinder could be extended with:
 •	real-time reporting dashboards for councils
 •	stronger moderation tools
@@ -206,14 +244,18 @@ With more time, BinFinder could be extended with:
 •	richer analytics for infrastructure planning
 •	integration with local-authority waste datasets
 ________________________________________
+
 Hackathon Track Fit Summary
+
 BinFinder is especially relevant for the following tracks:
 •	Best Use of Gemini API – because Gemini powers the project’s core image-validation and reasoning layer rather than being added only for presentation
 •	Best Use of Auth0 – because secure identity, protected API access, and trusted user-linked reporting are central to the product’s contribution model
 •	CXI+AI / Design to Delivery Accelerator – because the project combines thoughtful user experience with AI-assisted processing and a clear path from user action to delivered operational value
 •	Environmental / impact-focused judging – because the project supports sustainable cities, responsible disposal, and better public participation in waste infrastructure
 ________________________________________
+
 Team
+
 •	Maria Eduarda Mendes 
 •	Laranaya Pandit
 •	Faizan Alvi
