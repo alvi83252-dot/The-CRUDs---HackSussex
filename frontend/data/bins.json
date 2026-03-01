@@ -1,0 +1,125 @@
+[
+  {
+    "_id": "bin11",
+    "type": "general",
+    "postcode": "BN2",
+    "location": { "lat": 50.865280, "lng": -0.086300 },
+    "capacityPct": 42,
+    "photo": "/bin11.jpg"
+  },
+  {
+    "_id": "bin22",
+    "type": "recycling",
+    "postcode": "BN2",
+    "location": { "lat": 50.865363, "lng": -0.085586 },
+    "capacityPct": 65,
+    "photo": "/bin22.jpg"
+  },
+  {
+    "_id": "bin33",
+    "type": "general",
+    "postcode": "BN2",
+    "location": { "lat": 50.865126, "lng": -0.084569 },
+    "capacityPct": 20,
+    "photo": "/bin33.jpg"
+  },
+  {
+    "_id": "bin44",
+    "type": "recycling",
+    "postcode": "BN2",
+    "location": { "lat": 50.864949, "lng": -0.084793 },
+    "capacityPct": 75,
+    "photo": "/bin44.jpg"
+  },
+  {
+    "_id": "bin55",
+    "type": "general",
+    "postcode": "BN2",
+    "location": { "lat": 50.864899, "lng": -0.085291 },
+    "capacityPct": 90,
+    "photo": "/bin55.jpg"
+  },
+
+  {
+    "_id": "bin66",
+    "type": "general",
+    "postcode": "BN1",
+    "location": { "lat": 50.8229, "lng": -0.1373 },
+    "capacityPct": 35,
+    "photo": "/bin66.png"
+  },
+  {
+    "_id": "bin77",
+    "type": "recycling",
+    "postcode": "BN1",
+    "location": { "lat": 50.8236, "lng": -0.1358 },
+    "capacityPct": 72,
+    "photo": "/bin77.png"
+  },
+  {
+    "_id": "bin88",
+    "type": "general",
+    "postcode": "BN1",
+    "location": { "lat": 50.8218, "lng": -0.1390 },
+    "capacityPct": 18,
+    "photo": "/bin88.png"
+  },
+  {
+    "_id": "bin99",
+    "type": "recycling",
+    "postcode": "BN1",
+    "location": { "lat": 50.8209, "lng": -0.1362 },
+    "capacityPct": 60,
+    "photo": "/bin99.png"
+  },
+
+  {
+    "_id": "bin100",
+    "type": "general",
+    "postcode": "BN1",
+    "location": { "lat": 50.8245, "lng": -0.1380 },
+    "capacityPct": 55
+  },
+  {
+    "_id": "bin101",
+    "type": "recycling",
+    "postcode": "BN1",
+    "location": { "lat": 50.8230, "lng": -0.1415 },
+    "capacityPct": 30
+  },
+  {
+    "_id": "bin102",
+    "type": "general",
+    "postcode": "BN1",
+    "location": { "lat": 50.8200, "lng": -0.1345 },
+    "capacityPct": 80
+  },
+  {
+    "_id": "bin103",
+    "type": "recycling",
+    "postcode": "BN1",
+    "location": { "lat": 50.8192, "lng": -0.1388 },
+    "capacityPct": 22
+  },
+  {
+    "_id": "bin104",
+    "type": "general",
+    "postcode": "BN1",
+    "location": { "lat": 50.8252, "lng": -0.1321 },
+    "capacityPct": 66
+  },
+  {
+    "_id": "bin105",
+    "type": "recycling",
+    "postcode": "BN1",
+    "location": { "lat": 50.8210, "lng": -0.1420 },
+    "capacityPct": 40
+  },
+  {
+    "_id": "bin106",
+    "type": "general",
+    "postcode": "BN1",
+    "location": { "lat": 50.8260, "lng": -0.1365 },
+    "capacityPct": 50
+  }
+]

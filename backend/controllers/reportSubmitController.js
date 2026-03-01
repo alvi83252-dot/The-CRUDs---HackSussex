@@ -13,7 +13,7 @@ export async function submitBinReport(req, res) {
     const lat = Number(req.body.lat);
     const lng = Number(req.body.lng);
 
-    if (!lat || !lng) {
+   if (Number.isNaN(lat) || Number.isNaN(lng)) {
       return res.status(400).json({ error: "Missing lat/lng" });
     }
 
@@ -27,13 +27,14 @@ export async function submitBinReport(req, res) {
     });
 
     // Save report in MongoDB
-    const report = await Report.create({
-      type: "bin",
-      imageBase64: base64Image,
-      location: { lat, lng },
-      ai: aiResult,
-      createdAt: new Date()
-    });
+const report = await Report.create({
+  type: "bin",
+  imageBase64: base64Image,
+  lat,
+  lng,
+  ai: aiResult,
+  createdAt: new Date()
+});
 
     return res.json({ success: true, report });
 
@@ -72,13 +73,15 @@ export async function submitLitterReport(req, res) {
     });
 
     // Save report in MongoDB
-    const report = await Report.create({
-      type: "litter",
-      imageBase64: base64Image,
-      location: { lat, lng },
-      ai: aiResult,
-      createdAt: new Date()
-    });
+   const report = await Report.create({
+  type: "litter",
+  imageBase64: base64Image,
+  lat,
+  lng,
+  note,
+  ai: aiResult,
+  createdAt: new Date()
+});
 
     return res.json({ success: true, report });
 

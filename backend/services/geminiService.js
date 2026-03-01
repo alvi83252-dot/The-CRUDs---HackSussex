@@ -1,15 +1,15 @@
-export const validateLitterImage = async (base64Image) => {
-  // Simulate AI processing delay
-  await new Promise(resolve => setTimeout(resolve, 800));
+import dotenv from "dotenv";
+dotenv.config();
 
-  // Random severity for demo effect
+// ✅ DEMO/STUB VERSION (works without Gemini network)
+export async function verifyBinImage({ mimeType, base64Data }) {
+  await new Promise(r => setTimeout(r, 500));
+  return { isValid: true, severity: "N/A", confidence: 0.9 };
+}
+
+export async function validateLitterImage({ mimeType, base64Data, note }) {
+  await new Promise(r => setTimeout(r, 700));
   const severities = ["LOW", "MEDIUM", "HIGH"];
-  const randomSeverity =
-    severities[Math.floor(Math.random() * severities.length)];
-
-  return {
-    isValid: true,
-    severity: randomSeverity,
-    confidence: 0.85 + Math.random() * 0.14
-  };
-};
+  const severity = severities[Math.floor(Math.random() * severities.length)];
+  return { isValid: true, severity, confidence: 0.85 + Math.random() * 0.14 };
+}
