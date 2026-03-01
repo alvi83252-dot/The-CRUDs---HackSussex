@@ -1,9 +1,11 @@
 Overview
+
 BinFinder is a mobile-first web application that helps people find nearby bins, understand what type of waste each bin accepts, and contribute to cleaner, more sustainable communities through community reporting and AI-assisted validation.
 The platform combines live map-based discovery, user-submitted bin reports, image-based verification, and gamified participation to make waste disposal easier for the public while also generating higher-quality data that could support local authorities and other stakeholders involved in waste management.
 Our goal is not only to help users locate bins more easily, but also to improve the quality, accuracy, and usefulness of public waste infrastructure data in a way that is practical within a hackathon prototype.
 ________________________________________
 The Problem
+
 A common issue in many towns and cities is that people often do not know:
 •	where the nearest bin is
 •	what type of waste that bin accepts
