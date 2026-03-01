@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import MapView from "@/components/map/MapView";
 
 /* ── Types ── */
 interface Star {
@@ -27,32 +28,21 @@ function CrowIcon({ className }: { className?: string }) {
       className={className}
       aria-hidden="true"
     >
-      {/* Round body */}
       <ellipse cx="24" cy="28" rx="14" ry="12" fill="currentColor" opacity="0.85" />
-      {/* Round head */}
       <circle cx="24" cy="16" r="11" fill="currentColor" opacity="0.9" />
-      {/* Cheek blush */}
       <circle cx="16" cy="18" r="3" fill="#D1A676" opacity="0.45" />
       <circle cx="32" cy="18" r="3" fill="#D1A676" opacity="0.45" />
-      {/* Eyes - big white */}
       <circle cx="19" cy="14" r="3.5" fill="#F3E9D2" />
       <circle cx="29" cy="14" r="3.5" fill="#F3E9D2" />
-      {/* Pupils */}
       <circle cx="20" cy="13.5" r="1.8" fill="#4A4F1E" />
       <circle cx="30" cy="13.5" r="1.8" fill="#4A4F1E" />
-      {/* Eye shine */}
       <circle cx="21" cy="12.5" r="0.7" fill="#fff" />
       <circle cx="31" cy="12.5" r="0.7" fill="#fff" />
-      {/* Little beak */}
       <path d="M22 19l2 3 2-3" fill="#D1A676" />
-      {/* Wing left */}
       <ellipse cx="13" cy="28" rx="5" ry="4" fill="currentColor" opacity="0.5" transform="rotate(-10 13 28)" />
-      {/* Wing right */}
       <ellipse cx="35" cy="28" rx="5" ry="4" fill="currentColor" opacity="0.5" transform="rotate(10 35 28)" />
-      {/* Feet */}
       <path d="M19 39l-2 3M21 39l0 3M23 39l2 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
       <path d="M25 39l-2 3M27 39l0 3M29 39l2 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
-      {/* Tiny tail */}
       <ellipse cx="24" cy="39" rx="4" ry="2" fill="currentColor" opacity="0.4" />
     </svg>
   );
@@ -140,7 +130,6 @@ function StarsBackground() {
 function LightAmbient() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      {/* Sun */}
       <div
         className="absolute top-6 right-12 w-16 h-16 rounded-full opacity-60"
         style={{
@@ -149,7 +138,6 @@ function LightAmbient() {
         }}
       />
 
-      {/* Mountains */}
       <svg
         className="absolute bottom-0 left-0 w-full h-32 opacity-15"
         viewBox="0 0 1440 200"
@@ -161,7 +149,6 @@ function LightAmbient() {
         />
       </svg>
 
-      {/* Clouds */}
       {[0, 1, 2].map((i) => (
         <div
           key={`cloud-${i}`}
@@ -179,7 +166,6 @@ function LightAmbient() {
         </div>
       ))}
 
-      {/* Butterflies */}
       {[0, 1].map((i) => (
         <div
           key={`bfly-${i}`}
@@ -191,27 +177,14 @@ function LightAmbient() {
           }}
         >
           <svg width="16" height="12" viewBox="0 0 16 12" opacity="0.35">
-            <path
-              d="M8 6 Q4 0 1 3 Q4 6 8 6 Z"
-              fill="#D1A676"
-            />
-            <path
-              d="M8 6 Q12 0 15 3 Q12 6 8 6 Z"
-              fill="#D1A676"
-            />
-            <path
-              d="M8 6 Q5 8 2 10 Q5 7 8 6 Z"
-              fill="#B48E65"
-            />
-            <path
-              d="M8 6 Q11 8 14 10 Q11 7 8 6 Z"
-              fill="#B48E65"
-            />
+            <path d="M8 6 Q4 0 1 3 Q4 6 8 6 Z" fill="#D1A676" />
+            <path d="M8 6 Q12 0 15 3 Q12 6 8 6 Z" fill="#D1A676" />
+            <path d="M8 6 Q5 8 2 10 Q5 7 8 6 Z" fill="#B48E65" />
+            <path d="M8 6 Q11 8 14 10 Q11 7 8 6 Z" fill="#B48E65" />
           </svg>
         </div>
       ))}
 
-      {/* Bee */}
       <div
         className="absolute opacity-30"
         style={{
@@ -252,32 +225,23 @@ function SideMenu({
   const [highContrast, setHighContrast] = useState(false);
 
   useEffect(() => {
-    if (fontSize) {
-      document.documentElement.style.fontSize = "18px";
-    } else {
-      document.documentElement.style.fontSize = "";
-    }
+    document.documentElement.style.fontSize = fontSize ? "18px" : "";
   }, [fontSize]);
 
   useEffect(() => {
-    if (highContrast) {
-      document.documentElement.classList.add("high-contrast");
-    } else {
-      document.documentElement.classList.remove("high-contrast");
-    }
+    if (highContrast) document.documentElement.classList.add("high-contrast");
+    else document.documentElement.classList.remove("high-contrast");
   }, [highContrast]);
 
   if (!open) return null;
 
   return (
     <>
-      {/* Overlay */}
       <div
         className="fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      {/* Menu Panel */}
       <nav
         className="fixed left-0 top-0 bottom-0 z-50 w-72 p-6 flex flex-col gap-2 overflow-y-auto"
         style={{
@@ -292,23 +256,16 @@ function SideMenu({
         }}
         aria-label="Main menu"
       >
-        {/* Close */}
         <button
           onClick={onClose}
           className="self-end p-2 rounded-lg transition-colors hover:bg-muted/50"
           aria-label="Close menu"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path
-              d="M4 4l12 12M16 4L4 16"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
+            <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
 
-        {/* Brand */}
         <div className="flex items-center gap-3 mb-6">
           <CrowIcon className="w-10 h-10 text-foreground" />
           <span className="text-xl font-semibold tracking-tight text-foreground">
@@ -316,17 +273,13 @@ function SideMenu({
           </span>
         </div>
 
-        {/* Menu Items */}
         <button
-          onClick={() => {
-            onClose();
-          }}
+          onClick={() => onClose()}
           className="w-full text-left px-4 py-3 rounded-xl text-foreground font-medium transition-colors hover:bg-muted/60"
         >
           Home
         </button>
 
-        {/* Account */}
         <div>
           <button
             onClick={() => setAccountOpen(!accountOpen)}
@@ -339,21 +292,13 @@ function SideMenu({
               viewBox="0 0 16 16"
               className={`transition-transform duration-300 ${accountOpen ? "rotate-180" : ""}`}
             >
-              <path
-                d="M4 6l4 4 4-4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="none"
-                strokeLinecap="round"
-              />
+              <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </svg>
           </button>
+
           <div
             className="overflow-hidden transition-all duration-300"
-            style={{
-              maxHeight: accountOpen ? "160px" : "0px",
-              opacity: accountOpen ? 1 : 0,
-            }}
+            style={{ maxHeight: accountOpen ? "160px" : "0px", opacity: accountOpen ? 1 : 0 }}
           >
             <div className="flex flex-col gap-1 pl-4 pt-1">
               {(["login", "signup", "guest"] as const).map((action) => (
@@ -386,7 +331,6 @@ function SideMenu({
           Contact Us
         </button>
 
-        {/* Accessibility */}
         <div>
           <button
             onClick={() => setA11yOpen(!a11yOpen)}
@@ -399,21 +343,13 @@ function SideMenu({
               viewBox="0 0 16 16"
               className={`transition-transform duration-300 ${a11yOpen ? "rotate-180" : ""}`}
             >
-              <path
-                d="M4 6l4 4 4-4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                fill="none"
-                strokeLinecap="round"
-              />
+              <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
             </svg>
           </button>
+
           <div
             className="overflow-hidden transition-all duration-300"
-            style={{
-              maxHeight: a11yOpen ? "200px" : "0px",
-              opacity: a11yOpen ? 1 : 0,
-            }}
+            style={{ maxHeight: a11yOpen ? "200px" : "0px", opacity: a11yOpen ? 1 : 0 }}
           >
             <div className="flex flex-col gap-2 pl-4 pt-2">
               <label className="flex items-center gap-3 px-4 py-2 text-sm text-muted-foreground cursor-pointer">
@@ -446,13 +382,7 @@ function SideMenu({
 }
 
 /* ── Dark/Light Toggle ── */
-function ThemeToggle({
-  darkMode,
-  onToggle,
-}: {
-  darkMode: boolean;
-  onToggle: () => void;
-}) {
+function ThemeToggle({ darkMode, onToggle }: { darkMode: boolean; onToggle: () => void }) {
   return (
     <button
       onClick={onToggle}
@@ -510,16 +440,11 @@ export default function Home({
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleDark = useCallback(() => {
-    setDarkMode(!darkMode);
-  }, [darkMode, setDarkMode]);
+  const toggleDark = useCallback(() => setDarkMode(!darkMode), [darkMode, setDarkMode]);
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    if (darkMode) document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
   }, [darkMode]);
 
   return (
@@ -531,10 +456,8 @@ export default function Home({
           : "linear-gradient(180deg, #E6ECD0 0%, #D9E3B8 60%, #C7D2A4 100%)",
       }}
     >
-      {/* Background layers */}
       {darkMode ? <StarsBackground /> : <LightAmbient />}
 
-      {/* Header */}
       <header className="relative z-30 flex items-center justify-between px-5 py-4 md:px-8">
         <div className="flex items-center gap-3">
           <button
@@ -551,7 +474,6 @@ export default function Home({
         <ThemeToggle darkMode={darkMode} onToggle={toggleDark} />
       </header>
 
-      {/* Side Menu */}
       <SideMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
@@ -560,7 +482,6 @@ export default function Home({
         onAccountAction={onAccountAction}
       />
 
-      {/* Banner */}
       <section className="relative z-10 text-center px-5 pt-2 pb-6">
         {user && (
           <p className="text-sm text-accent font-medium mb-2">
@@ -575,31 +496,16 @@ export default function Home({
         </p>
       </section>
 
-      {/* Map Placeholder */}
+      {/* ✅ REAL MAP (replaces placeholder) */}
       <section className="relative z-10 px-5 md:px-8 pb-6">
         <div
           className="w-full rounded-2xl overflow-hidden"
-          style={{
-            height: "clamp(280px, 45vh, 480px)",
-            background: darkMode
-              ? "linear-gradient(135deg, #151d2a 0%, #1b2735 100%)"
-              : "linear-gradient(135deg, #F3E9D2 0%, #E6ECD0 100%)",
-            boxShadow: darkMode
-              ? "0 8px 32px rgba(0,0,0,0.3)"
-              : "0 8px 32px rgba(74,79,30,0.1)",
-          }}
+          style={{ height: "clamp(280px, 45vh, 480px)" }}
         >
-          <div className="w-full h-full flex flex-col items-center justify-center gap-3 text-muted-foreground/50">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span className="text-sm font-medium">Map View</span>
-          </div>
+          <MapView darkMode={darkMode} />
         </div>
       </section>
 
-      {/* Footer */}
       <footer
         ref={footerRef}
         className="relative z-10 mt-8 border-t border-border"

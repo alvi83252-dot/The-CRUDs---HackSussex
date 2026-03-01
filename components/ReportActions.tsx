@@ -62,6 +62,76 @@ function ReportPanel({
     null | "add-bin" | "missing" | "littering" | "council"
   >(null);
   const [missingChecks, setMissingChecks] = useState({ missing: false, unusable: false });
+  const [addBinImage, setAddBinImage] = useState<string | null>(null);
+  const [litteringImage, setLitteringImage] = useState<string | null>(null);
+  const [addBinLoading, setAddBinLoading] = useState(false);
+  const [litteringLoading, setLitteringLoading] = useState(false);
+
+  // Compress image for mobile optimization
+  const compressImage = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+
+          // Scale down if too large (max 1200px width)
+          if (width > 1200) {
+            height = (height * 1200) / width;
+            width = 1200;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          // Compress to JPEG with 0.8 quality
+          const compressed = canvas.toDataURL("image/jpeg", 0.8);
+          resolve(compressed);
+        };
+        img.onerror = () => reject(new Error("Failed to load image"));
+        img.src = event.target?.result as string;
+      };
+      reader.onerror = () => reject(new Error("Failed to read file"));
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleImageCapture = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setImage: (value: string | null) => void,
+    setLoading: (value: boolean) => void
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      alert("Please select an image file");
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("Image too large. Maximum 10MB allowed.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const compressed = await compressImage(file);
+      setImage(compressed);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error processing image:", error);
+      alert("Error processing image. Please try again.");
+      setLoading(false);
+    }
+  };
 
   if (!open) return null;
 
@@ -112,16 +182,51 @@ function ReportPanel({
           {activeReport === "add-bin" && (
             <div className="pl-4 flex flex-col gap-2 py-1" style={{ animation: "sprout-grow 0.25s ease-out" }}>
               <label
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-muted-foreground cursor-pointer transition-colors hover:bg-muted/30"
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs cursor-pointer transition-colors ${
+                  addBinLoading
+                    ? "text-muted-foreground/50 cursor-not-allowed"
+                    : "text-muted-foreground hover:bg-muted/30"
+                }`}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="3" />
-                  <path d="M12 8v8M8 12h8" strokeLinecap="round" />
-                </svg>
-                Upload image (required)
-                <input type="file" accept="image/*" className="hidden" />
+                {addBinLoading ? (
+                  <>
+                    <div className="animate-spin w-4 h-4 border-2 border-muted-foreground/30 border-t-muted-foreground rounded-full" />
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="3" />
+                      <path d="M12 8v8M8 12h8" strokeLinecap="round" />
+                    </svg>
+                    <span>{addBinImage ? "📷 Change Photo" : "📷 Take Photo"}</span>
+                  </>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={(e) => handleImageCapture(e, setAddBinImage, setAddBinLoading)}
+                  disabled={addBinLoading}
+                  className="hidden"
+                />
               </label>
               <p className="text-xs text-muted-foreground/60 px-3">Photo of the bin location</p>
+              {addBinImage && (
+                <div className="px-3 py-2">
+                  <img
+                    src={addBinImage}
+                    alt="Bin location preview"
+                    className="w-full h-40 object-cover rounded-lg border border-muted/30"
+                  />
+                  <button
+                    onClick={() => setAddBinImage(null)}
+                    className="mt-2 w-full text-xs px-2 py-1 rounded text-muted-foreground hover:bg-muted/40 transition-colors"
+                  >
+                    ✕ Remove Photo
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -181,16 +286,51 @@ function ReportPanel({
           {activeReport === "littering" && (
             <div className="pl-4 flex flex-col gap-2 py-1" style={{ animation: "sprout-grow 0.25s ease-out" }}>
               <label
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-muted-foreground cursor-pointer transition-colors hover:bg-muted/30"
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs cursor-pointer transition-colors ${
+                  litteringLoading
+                    ? "text-muted-foreground/50 cursor-not-allowed"
+                    : "text-muted-foreground hover:bg-muted/30"
+                }`}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="3" />
-                  <path d="M12 8v8M8 12h8" strokeLinecap="round" />
-                </svg>
-                Upload image (required)
-                <input type="file" accept="image/*" className="hidden" />
+                {litteringLoading ? (
+                  <>
+                    <div className="animate-spin w-4 h-4 border-2 border-muted-foreground/30 border-t-muted-foreground rounded-full" />
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="3" />
+                      <path d="M12 8v8M8 12h8" strokeLinecap="round" />
+                    </svg>
+                    <span>{litteringImage ? "📷 Change Photo" : "📷 Take Photo"}</span>
+                  </>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={(e) => handleImageCapture(e, setLitteringImage, setLitteringLoading)}
+                  disabled={litteringLoading}
+                  className="hidden"
+                />
               </label>
               <p className="text-xs text-muted-foreground/60 px-3">Photo of the littered area</p>
+              {litteringImage && (
+                <div className="px-3 py-2">
+                  <img
+                    src={litteringImage}
+                    alt="Littering preview"
+                    className="w-full h-40 object-cover rounded-lg border border-muted/30"
+                  />
+                  <button
+                    onClick={() => setLitteringImage(null)}
+                    className="mt-2 w-full text-xs px-2 py-1 rounded text-muted-foreground hover:bg-muted/40 transition-colors"
+                  >
+                    ✕ Remove Photo
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
