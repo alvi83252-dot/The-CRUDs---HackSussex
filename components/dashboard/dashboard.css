@@ -1,0 +1,78 @@
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #e7f3e7, #cde3c5);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  background: #f4f7f4;
+  border-radius: 20px;
+  padding: 25px;
+  width: 350px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.welcome-card {
+  text-align: center;
+}
+
+.trophy-circle {
+  width: 80px;
+  height: 80px;
+  background: #e0e5e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin: 0 auto 15px auto;
+}
+
+.league-badge {
+  background: #d9e3d9;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #d0d0d0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4caf50;
+  border-radius: 10px;
+}
+
+.small-progress {
+  height: 6px;
+  background: #ddd;
+  border-radius: 6px;
+  width: 150px;
+  margin: 5px 0;
+  overflow: hidden;
+}
+
+.small-fill {
+  height: 100%;
+  background: #4caf50;
+}
+
+.xp-badge {
+  background: #e0f2e0;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 12px;
+}
