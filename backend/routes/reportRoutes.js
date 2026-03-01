@@ -1,9 +1,10 @@
 import express from "express";
-import { checkJwt } from "../middleware/auth.js";
+import multer from "multer";
 import { createReport } from "../controllers/reportController.js";
 
 const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
-router.post("/", checkJwt, createReport);
+router.post("/", upload.single("image"), createReport);
 
 export default router;

@@ -1,45 +1,22 @@
 import mongoose from "mongoose";
 
-// store each user submission
-const ReportSchema = new mongoose.Schema({
-    tyoe: {
-        type: String,
-        enum: ["bin_fill", "litter"],
-        required: true
-    },
+const reportSchema = new mongoose.Schema({
+  type: String,
 
-    binId: {
-        type: String,
-        required: false
-    },
+  // Store image directly in Mongo (hackathon version)
+  imageBase64: String,
 
-    userId: {
-        type: String, // Auth0 sub
-        required: true
-    },
+  lat: Number,
+  lng: Number,
 
-    imageUrl: {
-        type: String, 
-        required: true
-    },
+  note: String,
 
-    ai: {
-        mode: String,
-        isValid: Boolean,
-        confidence: Number,
-        labels: [String],
-        reason_short: String
-    },
+  ai: {
+    isValid: Boolean,
+    severity: String,
+    confidence: Number
+  }
 
-    location: {
-        lat: Number,
-        lng: Number
-    },
+}, { timestamps: true });
 
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-export default mongoose.model("Report", ReportSchema);
+export default mongoose.model("Report", reportSchema);
