@@ -1,38 +1,37 @@
-import express from "express";
-import cors from "cors";
+// load environment variables
 import dotenv from "dotenv";
-import multer from "multer";
-import { verifyBinImage } from "./gemini.js";
-
 dotenv.config();
 
+// core dependencies
+import mongoose from "mongoose";
+import express from "express";
+import cors from "cors";
+
+// import route groups
+import reportRoutes from "./routes/reportRoutes.js";
+import binRoutes from "./routes/binRoutes.js";
+import facilityRoutes from "./routes/facilityRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import guestRoutes from "./routes/guestRoutes.js"
+
 const app = express();
+app.use(cors()); // allows frontend to call backend
+app.use(express.json({ limit: "10mb" })); // parse JSON bodies (images may be base64)
 
-app.use(cors());
-app.use(express.json());
-const upload = multer({ storage: multer.memoryStorage() });
+// Connect to DigitalOcean MongoDB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB (DigitalOcean) Connected!"))
+.catch((err) => console.error("MongoDB Error:", err));
 
-// Simple health check route
-app.get("/health", (req, res) => {
-  res.json({ status: "Backend is running ✅" });
-});
+// Register API routes
+app.use("/api/reports", reportRoutes);
+app.use("/api/bins", binRoutes);
+app.use("/api/facilities", facilityRoutes);
+app.use("api/users", userRoutes);
+app.use("/api/guest", guestRoutes);
 
-app.post("/ai/verify-bin", upload.single("image"), async (req, res) => {
-  try {
-    if (!req.file) return res.status(400).json({ error: "Missing image file" });
-
-    const mimeType = req.file.mimetype;
-    const base64Data = req.file.buffer.toString("base64");
-
-    const verdict = await verifyBinImage({ mimeType, base64Data });
-    return res.json(verdict);
-  } catch (err) {
-    return res.status(500).json({ error: String(err.message || err) });
-  }
-});
-
-const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+// Start server
+app.listen(process.env.PORT, () => 
+console.log('Backend is successfully running on port ${process.env.PORT}')
+);
